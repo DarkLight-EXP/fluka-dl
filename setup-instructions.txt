@@ -1,0 +1,13 @@
+Install flair:
+
+http://flair.web.cern.ch/flair/download.html
+The instructions for Ubuntu worked, for me.
+
+Install fluka:
+
+After getting all your approvals:
+https://fluka.cern/download/latest-fluka-release
+I got the gfortran 9, 64 bits (.deb)
+and installed it with
+sudo dpkg -i fluka_4-2.2.x86-Linux-gfor9_amd64.deb
+This installs fluka in /usr/local/fluka

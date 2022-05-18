@@ -1,0 +1,36 @@
+DEFAULTS                                                              PRECISIO
+RANDOMIZ
+PHYSICS            3                                                  EVAPORAT
+START          10000
+BEAM           -0.03                          -1.0      -1.0          ELECTRON
+BEAMPOS            0         0      -100
+USRBIN            10   DOSE-EQ       -21       300       300       300dose
+USRBIN          -300      -300      -300        60        60        60 &
+USRBIN            10    ENERGY       -22       100       100       100heat
+USRBIN          -100      -100      -100        20        20        20 &
+RESNUCLE           3       -23                          SLUG          activation
+GEOBEGIN                                                              COMBNAME
+    0    0          
+RPP body1      -100 100 -100 100 -100.0 100.0
+RCC body2      0 0 -100 0 0 100.0 5.0
+RPP body3      -300 300 -300 300 -300.0 300.0
+RPP body4      -400 400 -400 400 -400.0 400.0
+END
+SLUG         5 +body1 -body2
+AIR          5 +body3 -body1
+               | +body2
+BORDER       5 +body4 -body3
+END
+GEOEND
+MATERIAL          19               0.862                              POTASSIU
+* Concrete portland
+* Concrete has a wide variation in density and composition.
+MATERIAL                             2.3                              CONCRETE
+COMPOUND       -0.01  HYDROGEN    -0.001    CARBON -0.529107    OXYGENCONCRETE
+COMPOUND      -0.016    SODIUM    -0.002  MAGNESIU -0.033872  ALUMINUMCONCRETE
+COMPOUND   -0.337021   SILICON    -0.013  POTASSIU    -0.044   CALCIUMCONCRETE
+COMPOUND      -0.014      IRON                                        CONCRETE
+ASSIGNMA    CONCRETE      SLUG
+ASSIGNMA         AIR       AIR
+ASSIGNMA    BLCKHOLE    BORDER
+STOP

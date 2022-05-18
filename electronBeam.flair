@@ -1,0 +1,122 @@
+# flair project file
+Version: 300
+Mode: fluka
+md5: e5f8cd093760b7371a5df2dc30d7e253
+Input:
+DEFAULTS PRECISIO
+RANDOMIZ
+PHYSICS EVAPORAT 3
+START , 10000
+BEAM ELECTRON -0.03,,, -1.0 -1.0
+	@select=1
+BEAMPOS , 0 0 -100
+USRBIN dose 10 DOSE-EQ -21 300 300 300 -300 -300 -300 60 60 60
+USRBIN heat 10 ENERGY -22 100 100 100 -100 -100 -100 20 20 20
+RESNUCLE activation 3 -23,,, SLUG
+GEOBEGIN COMBNAME
+RPP body1 -100 100 -100 100 -100.0 100.0
+	@select=8
+RCC body2 0 0 -100 0 0 100.0 5.0
+	@select=8
+RPP body3 -300 300 -300 300 -300.0 300.0
+	@select=8
+RPP body4 -400 400 -400 400 -400.0 400.0
+	@select=8
+REGION SLUG
+	+body1 -body2
+REGION AIR
+	+body3 -body1
+	| +body2
+REGION BORDER
+	+body4 -body3
+GEOEND
+MATERIAL POTASSIU 19,, 0.862
+*Concrete portland
+*Concrete has a wide variation in density and composition.
+MATERIAL CONCRETE,,, 2.3
+COMPOUND CONCRETE -0.01 HYDROGEN -0.001 CARBON -0.529107 OXYGEN -0.016 SODIUM -0.002 \
+	 MAGNESIU -0.033872 ALUMINUM -0.337021 SILICON -0.013 POTASSIU \
+	 -0.044 CALCIUM -0.014 IRON
+ASSIGNMA , CONCRETE SLUG
+ASSIGNMA , AIR AIR
+ASSIGNMA , BLCKHOLE BORDER
+EndInput
+
+Page: Input
+plotengine: Gnuplot
+
+# Run information
+Run: <default>
+	Status:   3
+	StartRun: 1651787681
+End
+
+# Plots information
+Plot: Red
+	Type: Geometry
+	basisu: 0 0 1
+	basisv: 1 0 0
+	coord: Z-X
+	extends: 1069.93 529.171
+	grid: 0
+	layer: Media
+	origin: 5.58735 0 5.69069
+End
+Plot: Green
+	Type: Geometry
+	basisu: 0.836516 0.0173377 0.547668
+	basisv: 0.224144 0.901221 -0.370891
+	extends: 358.318 177.219
+	layer: 3D
+	origin: 8.61539 13.4124 -2.00013
+End
+Plot: Blue
+	Type: Geometry
+	basisu: 0 0 1
+	coord: Z-Y
+	extends: 144 71.2202
+	layer: Media
+	origin: 0 -13.6475 -34.1685
+End
+Plot: Magenta
+	Type: Geometry
+	coord: X-Y
+	extends: 429.982 212.663
+	grid: 0
+	layer: Media
+	origin: 37.1439 -5.6228 0
+End
+Plot: electronBeam_21_plot
+	Type: USRBIN
+	bxmax: 50.
+	bxmin: -50.
+	cblog: 1
+	cbtics: 1
+	datafile: electronBeam_21.bnn
+	grid: 0
+	hist: 2D Projection
+	int: 34069.679166838476
+	max: 0.159557000
+	min: 2.48208915E-23
+	proj: X
+	title: USRBIN electronBeam 21
+End
+Plot: electronBeam_22_plot
+	Type: USRBIN
+	cblog: 1
+	cbtics: 1
+	datafile: electronBeam_22.bnn
+	grid: 0
+	hist: 2D Projection
+	int: 2.9965382181746172E-002
+	max: 3.62648478E-07
+	min: 4.59442953E-15
+	title: USRBIN electronBeam 22
+End
+Plot: electronBeam_23_plot
+	Type: RESNUCLE
+	datafile: electronBeam_23.rnc
+	grid: 0
+	plot: Z/A
+	title: RESNUCLE electronBeam 23
+End
